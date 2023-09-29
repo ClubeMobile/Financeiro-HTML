@@ -1,0 +1,110 @@
+<html>
+
+	<head>
+	
+	<title>MENU OPÇÕES - FINANCEIRO</title> 
+
+	
+	<script language="javascript">
+
+	
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}
+
+
+	</script>
+	
+	
+	</head>
+
+
+	<body bgcolor="silver"><div id="div.texto">
+
+ 		<table border="0">
+
+			<tr>
+		
+				<td bgcolor="white"><fieldset style="width: 199; height: 74" bgcolor="white">
+
+  				<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+		
+    				<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+
+  				<font size="2">Acesso Restrito - Depto. Financeiro</font>
+
+				<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="Desconecta()"></p></input>
+		
+  				</fieldset></td>
+
+			</tr>
+
+		</table><hr>	
+	
+		<br><br><br><br><br><br><br>
+
+		<center><table border ="0">
+			<form name="frm">
+
+				<tr>
+					<td><input type="button" name="a" value="ORDEM DE PAGAMENTO/RECEBIMENTO" style="width: 400; height: 38; color: blue" onclick="window.location.href='3_OrdemPagamentoRecebimento.htm';"></td>
+				</tr>
+		
+				<tr>
+
+					<td><center><input type="button" name="b" value="MOVIMENTAÇÃO FINANCEIRA" style="width: 400; height: 38; color: blue" onclick="window.location.href='4_MovimentacaoFinanceira.html';"></td>
+				</tr>
+
+				<tr>
+					<td><center><input type="button" name="c" value="GERAR RELATÓRIO DE CONTAS EM BANCOS" style="width: 400; height: 38; color: blue" onclick="window.location.href='5_GerarRelatorioBancos.html';"></td>
+				</tr>
+
+				<tr>
+					<td><center><input type="button" name="d" value="FORMA DE PAGAMENTO - CRÉDITO EM CONTA CORRENTE" style="width: 400; height: 38; color: blue" onclick="window.location.href='6_FormaPagamentoCreditoConta.html';"></td>
+				</tr>
+
+				<tr>
+					<td><center><input type="button" name="e" value="FORMA DE PAGAMENTO - CHEQUE" style="width: 400; height: 38; color: blue" onclick="window.location.href='7_FormaPagamentoCheque.html';"></td>
+				</tr>
+				
+				<tr>
+					<td><center><input type="button" name="f" value="FORMA DE PAGAMENTO - BOLETO BANCÁRIO" style="width: 400; height: 38; color: blue" onclick="window.location.href='8_FormaPagamentoBoleto.html';"></td>
+				</tr>
+				
+						
+
+			</form>
+
+		</table>
+
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
+
+	<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+	<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+	<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+	
+
+	</div>
+	</body>
+</html>

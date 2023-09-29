@@ -1,0 +1,278 @@
+<html>
+
+	<head>
+
+	<title>MOVIMENTAÇÃO FINANCEIRA</title>
+
+
+		<script language="javascript">
+
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}
+	
+
+		</script>
+
+
+	
+		<script language="javascript" type="text/javascript">
+   
+	
+			function mascaraData(campoData)
+        		{
+
+              			var data = campoData.value;
+
+              			if (data.length == 2)
+              			{
+					data = data + '/';
+					document.frm.txtdata.value = data;
+					return true;              
+				}
+
+				if (data.length == 5)
+				{
+					data = data + '/';
+					document.frm.txtdata.value = data;
+					return true;
+				}
+
+
+			}//function 
+
+	
+
+          		}
+
+		</script>
+   	 
+	</head>
+
+
+
+	<body bgcolor="silver"  scroll="auto">	
+		
+		<form name="frm">
+		
+			<table border="0">
+
+				<tr>
+		
+					<td bgcolor="white"><fieldset style="width: 199; height: 79" bgcolor="white">
+  					<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+    					<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+					<font size="2">Acesso Restrito - Depto. Financeiro</font>
+					<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="Desconecta()"></p></input>
+  					</fieldset></td>
+					
+				</tr>
+
+			</table><br><br>
+
+
+			<hr color="cadetblue"><br>
+
+		
+			<center><table border="0">
+			
+				<tr>
+
+					<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>
+		
+					<td colspan="2"><fieldset style="width: 245; height: 35; color: white">
+  					<legend><b><font size="2" color="black">Período de Pesquisa</b></legend>&nbsp;&nbsp;
+					Inicial:&nbsp;<input type="textbox" name="txtdata" value="" size="7" OnKeyUp="mascaraData(this);" maxlength="10">&nbsp;&nbsp;
+					Final:&nbsp;<input type="textbox" name="txtdata2" value="" size="7" OnKeyUp="mascaraData2(this);" maxlength="10"></font></fieldset>
+					</td>
+		
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>
+
+					<td colspan="2"><fieldset style="width: 230; height: 35; color: black">
+	  				<legend><b><font size="2" color="black">Modo de Exibição</b></legend>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="radioexibe">Gráfico&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="radioexibe" checked>Tabela</font>
+					</td>
+
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>	
+			
+					<td><input type="button" name="processar" value="PROCESSAR" style="width: 130; height: 25; color: red"; onclick="window.location.href='processar.htm';">
+					</td>
+
+				</tr>
+
+			</table>
+
+			<br>
+		
+			<hr color="orange"><br><br><br>
+
+		
+			<fieldset style="width: 950; height: 455">
+
+				<table bgcolor="white">
+			
+					<tr>
+
+						<td bgcolor="silver">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documento&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Descrição&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Valor Recebimento&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Valor Pagamento&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Saldo Atual</td>
+
+					</tr>
+
+
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white"><b>_______________________________________________________________________________________________________________________</b><font></p></td>
+
+					</tr> 
+			
+
+					<tr>
+
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Pagamento de Salários&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						20/09/2009&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						21.200,00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-) 21.200,00
+						</td>
+
+					</tr>	
+
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+					</tr>
+
+					<tr>
+
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						332&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Vendas no Período&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						20/09/2009&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						54.700,00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						33.500,00
+						</td>
+
+					</tr>
+
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+
+					</tr>
+		
+					<tr>
+	
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						554&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Compras de Produtos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						20/09/2009&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						15.500,00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18.000,00
+						</td>
+
+					</tr>
+			
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+
+					</tr>
+
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+
+					</tr>
+			
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+
+					</tr>
+			
+					<tr>
+
+						<td colspan="5"><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+			
+					</tr>
+			  		
+				</table>
+
+				<hr color="orange">
+
+			</fieldset></center>
+
+			<br>			
+
+				<p align="left">
+				
+				<table border="0">
+
+					<tr>
+
+						<td>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" name="idvoltarmenu" value="VOLTAR AO MENU" style="width: 150; height: 30; color: cadetblue"; onclick="window.location.href='2_menuopcoesfinanceiro.htm';"></td>
+		
+					</tr>
+
+			
+				</table></p>
+
+			
+
+		</form>
+		
+
+		<br><br><hr>
+
+
+		<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+		<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+		<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+	
+	</body>
+
+</html>
+
+
+
+

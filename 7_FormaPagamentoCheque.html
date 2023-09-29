@@ -1,0 +1,218 @@
+<html>
+
+	<head> 
+
+	<title>FORMA DE PAGAMENTO - CHEQUE</title>
+		
+    	<style type="text/css">
+   
+		table  
+		{
+			border-width: medium;
+			border-style: double;
+		}
+    
+		#tabuser
+		{
+			border-width: 0;
+		}
+    
+		div
+		{
+			color:red;
+			font-family:verdana;
+			font-size:11px;
+			font-weight:bold;
+    		}
+		
+	</style>
+
+		
+	<script language="javascript">	
+
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}
+		
+
+		function Fgrava()
+		{
+			var conta, cheque, bompara, valor, divcheque, divconta, divvalor, divbompara;
+					
+			conta=FormaPagto.txtconta.value;
+			bompara=FormaPagto.txtdata.value;
+			cheque=FormaPagto.txtcheque.value;
+			valor =FormaPagto.txtvalor.value;
+					
+			divconta=document.getElementById("divconta");
+                   	divcheque=document.getElementById("divcheque");
+                	divvalor=document.getElementById("divvalor");
+                	divbompara=document.getElementById("divbompara");
+    	  
+                  	divconta.innerHTML="";
+                  	divcheque.innerHTML="";
+                  	divvalor.innerHTML="";
+                 	divbompara.innerHTML="";
+
+			if(conta.length<1)
+			{
+				divconta.innerHTML="*Por Favor, digite a conta";
+			}
+			
+			if(isFinite(conta) == false)
+			{	
+				divconta.innerHTML="*Campo 'CONTA:' precisa ser numérico";
+			}
+
+			if(cheque.length<1)
+			{
+				divcheque.innerHTML="*Por Favor, digite o número do cheque";					
+			}
+
+			if(isFinite(cheque) == false)
+			{	
+				divcheque.innerHTML="*Campo 'CHEQUE:' precisa ser numérico";
+			}
+
+			if(valor.length<1)
+			{
+				divvalor.innerHTML="*Por Favor, digite o Valor do cheque";
+			}
+								
+			if(isFinite(valor) == false)
+			{	
+				divvalor.innerHTML="*Campo 'VALOR:' precisa ser numérico";
+			}
+			
+			if(bompara.length<1)
+			{	
+				divbompara.innerHTML="*Por Favor, digite a Data BomPara do Cheque";
+			}
+			
+		}
+
+		function fechar() 
+		{
+			alert("Ao desconectar, todas as informações serão desconsideradas.");
+			window.close();
+		}
+
+	</script>	
+
+	</head>	
+
+	
+
+	<body bgcolor="silver">
+
+		<form name="FormaPagto">
+			
+			<table bgcolor="white">
+
+				<tr>
+
+					<td><fieldset style="width: 199; height: 79" bgcolor="white">
+					<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+					<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+					<font size="2">Acesso Restrito - Depto. Financeiro</font>
+					<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="window.location.href='paginainicial.htm';"></p></input>
+					</fieldset></td>
+
+				</tr>
+
+  		   	</table>
+               
+              		<br><hr><br><br><br>
+			
+			               		
+			<center><fieldset style="width: 500; height: 320"><legend align="center">
+
+			<font color="blue" size="5"><b>Dados a serem Creditados</b></font>
+
+			</legend><br><hr color="blue">
+			
+			<br><br>
+			
+			<table bgcolor="white">
+			
+				<tr>
+					<td>Conta:</td>
+					<td><input type="textbox" name="txtconta" value="" size="20" maxlength="20"></td>
+				</tr>
+
+				<tr>
+					<td>Cheque:</td>
+					<td><input type="textbox" name="txtcheque" value="" size="10" maxlength="10"></td>
+				</tr>
+
+				<tr>
+					<td>Valor:</td>
+					<td><input type="textbox" name="txtvalor" value="" size="20" maxlength="20"></td>
+				</tr>
+
+				<tr>
+					<td>Bom Para:</td>
+					<td><input type="textbox" name="txtdata" value="" size="10" maxlength="10"></td>
+				</tr>
+					
+			</table>
+
+			<br><br><hr color="orange"><br>
+			
+	    		<input type="reset" name="butOK" value="Cancelar"  style="width: 150; height: 30" onclick="">
+  	       		<input type="button" name="menu" value="Voltar ao Menu" style="width: 150; height: 30; color: cadetblue" onclick="window.location.href='menuopcoesfinanceiro.htm';">
+  	       		<input type="button" name="enviar" value="Enviar" onclick="Fgrava()" style="width: 150; height: 30; color: red"></td>
+					
+	    		<br><br>
+	    		</fieldset>
+						
+			<div id="divconta"></div>
+			<div id="divcheque"></div>
+  	      	 	<div id="divvalor"></div>
+  	       		<div id="divbompara"></div>
+
+			</center>
+
+		</form>	
+		
+		<br><br><br><br><br><br><br><br><hr>
+
+
+		<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+		<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+		<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+
+		
+	</body>
+
+</html>
+
+
+
+
+
+
+
+
+

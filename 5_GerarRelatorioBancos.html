@@ -1,0 +1,219 @@
+<html>
+
+	<head>
+
+	<title>GERAR RELATÓRIO DE CONTAS EM BANCOS</title>
+
+
+	<script language="javascript">
+
+
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}
+	
+	</script>
+
+
+	</head>
+
+	
+	<body bgcolor="silver"  scroll="auto">	
+		
+		<table border="0">
+
+		<tr>
+		
+			<td bgcolor="white"><fieldset style="width: 193; height: 79" bgcolor="white">
+  			<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+
+		
+    			<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+
+  			<font size="2">Acesso Restrito - Depto. compras</font>
+
+			<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="Desconecta()"></p></input>
+		
+  			</fieldset></td>
+		
+		
+		<tr>
+
+		
+
+		</table><hr><br><br>
+		
+		
+
+		<center><table border="0">		
+		<tr>
+		
+		<td bgcolor="silver"><fieldset style="width: 205; height: 35; color: black">
+  		<legend><b><font size="2" color="black">BANCO</font></b></legend>
+
+		
+		<form name="frmbanco">
+  			<select name="selbanco" style="width:200px; margin-right:20px;">
+				<option>001 - Banco do Brasil</option>
+				<option>002 - ABN Anro Real</option>			
+				<option>003 - Bradesco</option>
+				<option>004 - Itaú</option>
+				<option>005 - Bank Boston</option>
+
+				<option>006 - Caixa Econômica Federal</option>
+			</select>
+		</form>
+  		</fieldset></td>
+		
+		<td></td>
+
+		<td bgcolor="silver"><fieldset style="width: 205; height: 35; color: black">
+  		<legend><b><font size="2" color="black">AGÊNCIA</font></b></legend>
+
+  		<form name="frmbanco">
+			<select name="selbanco" style="width:200px; margin-right:20px;">
+				</optgroup>
+				<optgroup label="Agências Grande São Paulo" >
+
+				<option>0218 - Central Paulista</option>
+				<option>0273 - Mogi das Cruzes</option>			
+				<option>0301 - Tatuapé</option>
+
+				<option>0262 - Butantã</option>
+				<option>0167 - Imigrantes</option>
+				<option>0874 - Jabaquara</option>
+
+				</optgroup>
+				<optgroup label="Outras Localidades" >
+
+				<option>0981 - Nova Manaus</option>
+
+				<option>0955 - Costa Neblina</option>
+				<option>0941 - Rondonópolis</option>
+				<option>0936 - Piraporinha Iguaçú</option>
+
+			</select>
+
+		
+		</form>
+  		</fieldset></td>
+
+		<td></td>
+		
+		<td bgcolor="silver"><fieldset style="width: 205; height: 78; color: black">
+  		<legend><b><font size="2" color="black">GERENTE DE CONTA</font></b></legend>
+
+  		<p style="margin-top: -1; margin-bottom: -1"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  		<font color="red" face="Times New Roman" size="3">Jefferson Batista Soares</font>
+
+  		</fieldset></td>
+
+		</tr>
+		</table><br><br>
+
+	
+		<fieldset style="width: 950; height: 455">
+
+		<table bgcolor="white">
+		
+		<hr color="cadetblue">
+
+  			<tr>
+				<td><p align="center"><font color="white"><b>_______________________________________________________________________________________________________________________</b><font></p></td>
+
+			</tr> 
+			
+			<tr>
+				<td><p align="center"><font color="white">_______________________</font>Depósitos<font color="white"> ________________________________________________ </font> 15.300,00<font color="white">_____________________</font><hr color="silver"></p></td>
+  				
+  			</tr>
+
+			<tr>
+
+				<td><p align="center"><font color="white">_______________________</font>Saques<font color="white"> ________________________________________________ </font> (-) 1.700,00<font color="white">_____________________</font><hr color="silver"></p></td>
+  				
+  			</tr>
+
+			<tr>
+				<td><p align="center"><font color="white">_______________________</font>Aplicação Financeira - CDB<font color="white"> __________________________________ </font> 30.000,00<font color="white">_____________________</font><hr color="silver"></p></td>
+
+  				
+  			</tr>
+
+			<tr>
+				<td><p align="center"><font color="white">_______________________</font>Limite Especial BB<font color="white"> ________________________________________ </font> 150.000,00<font color="white">_____________________</font><hr color="silver"></p></td>
+  				
+  			</tr>
+
+			<tr>
+				<td><p align="center"><font color="white">_______________________</font>Saldo com o limite em 02/08/2009<font color="white"> _____________________________ </font> 193.600,00<font color="white">_____________________</font><hr color="silver"></p></td>
+  				
+  			</tr>
+
+			<tr>
+				<td><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+
+			</tr>
+
+			<tr>
+				<td><p align="center"><font color="white">_</font><hr color="silver"></p></td>
+			</tr>
+		
+			<tr>
+
+				<td><font color="red"><p align="left">* Valores podendo sofrer alterações até o final do dia.</p></font><p align="center"></p></td>
+			</tr>
+
+			  		
+  		</table><hr color="white">
+
+		</fieldset>
+
+		<br><br>
+
+		
+		<table border="0">
+
+			<tr>
+
+				<td><input type="button" name="idvisualizar" value="VISUALIZAR IMPRESSÃO" style="width: 190; height: 30; color: green"; onclick="window.location.href='visualizarImpressao.pdf';";>
+
+				<input type="button" name="idimprimir" value="IMPRIMIR" style="width: 120; height: 30; color: black"; onclick="window.location.href='imprimir.html';">
+
+				<input type="button" name="idvoltarmenu" value="VOLTAR AO MENU" style="width: 150; height: 30; color: cadetblue"; onclick="window.location.href='2_menuopcoesfinanceiro.htm';"></td>
+
+			</tr></center>
+
+		</table>
+
+
+		<br><br><br><hr>
+
+		<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+		<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+		<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+		
+	</body>
+
+</html>

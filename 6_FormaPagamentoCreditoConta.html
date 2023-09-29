@@ -1,0 +1,375 @@
+<html>
+
+	<head> 
+
+	<title>FORMA DE PAGAMENTO - CRÉDITO EM CONTA CORRENTE</title>
+	
+	<style type="text/css">
+    
+		table  
+		{
+			border-width: medium;
+			border-style: double;
+    		}
+    
+		#tabuser
+		{
+			border-width: 0;
+		}
+    
+		div
+		{
+			color:red;
+			font-family:verdana;
+			font-size:11px;
+			font-weight:bold;
+		}
+		
+	</style>
+
+	
+	<script language="javascript">	
+
+
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}
+
+	
+		function Fgrava()
+		{
+
+			var posicao, escolha, valor;
+			var banco, agencia, conta, divagencia, divconta, divvalor;
+		
+			divagencia=document.getElementById("divagencia");
+			divconta=document.getElementById("divconta");
+			divvalor=document.getElementById("divvalor");
+
+    	  		divagencia.innerHTML="";
+    	  		divconta.innerHTML="";
+    	  		divvalor.innerHTML="";
+
+		
+			agencia=FormaPagto.txtagencia.value;
+			
+			if(agencia.length<1)
+			{
+				divagencia.innerHTML="*Por Favor, digite a agência";
+			}
+		
+			if(isFinite(agencia) == false)
+			{	
+				divagencia.innerHTML="*Campo 'AGENCIA:' precisa ser numérico";
+			}
+
+			conta=FormaPagto.txtconta.value;
+
+			if(conta.length<1)
+			{
+				divconta.innerHTML="*Por Favor, digite a conta";
+			}
+
+			if(isFinite(conta) == false)
+			{	
+				divconta.innerHTML="*Campo 'CONTA:' precisa ser numérico";
+			}
+
+      			valor=FormaPagto.txtvalor.value;
+		
+			if(valor.length<1)
+			{
+        			divvalor.innerHTML="*Por Favor, digite o Valor para Crédito em Conta Corrente";
+			}
+					
+			if(isFinite(valor) == false)
+			{	
+         			divvalor.innerHTML="*Campo 'VALOR:' precisa ser numérico";
+			}
+
+			}
+			
+		function fechar() 
+		{
+			alert("Ao desconectar, todas as informações serão desconsideradas.");
+			window.close();
+		}
+
+	</script>
+
+
+	</head>	
+
+
+
+	<body bgcolor="Silver">
+
+		<form name="FormaPagto">
+
+			<table bgcolor="white">
+			
+				<tr>
+  			        			
+					<td><fieldset style="width: 199; height: 79" bgcolor="white">
+					<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+    					<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+					<font size="2">Acesso Restrito - Depto. Financeiro</font>
+					<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="window.location.href='paginainicial.htm';"></p></input>
+					</fieldset></td>
+
+           			</tr>
+
+  		   	</table>
+
+   
+   			<hr></hr><br><br><br><br><br>
+
+
+  		        <center><table bgcolor="white">
+			
+      				<tr>
+        				<td><b>DADOS A SEREM CREDITADOS</td></b>
+     				</tr>
+
+    			</table>
+
+			<hr color="cadetblue"><br><br>
+
+			<table bgcolor="white">
+				
+				<tr>
+
+					<td>Banco:</td>
+						
+						<td><select name="Bco">
+						<option>001 BANCO DO BRASIL S.A.                             </option>
+						<option>003 BANCO DA AMAZONIA S.A.                           </option>
+						<option>004 BANCO DO NORDESTE DO BRASIL S.A.                 </option>
+						<option>008 BANCO SANTANDER MERIDIONAL S.A.                  </option>
+						<option>021 BANESTES S.A BANCO DO ESTADO DO ESPIRITO SANTO   </option>
+
+						<option>024 BANCO DE PERNAMBUCO S.A.-BANDEPE                 </option>
+						<option>025 BANCO ALFA S/A                                   </option>
+						<option>027 BANCO DO ESTADO DE SANTA CATARINA S.A.           </option>
+						<option>029 BANCO BANERJ S.A.                                </option>
+						<option>031 BANCO BEG S.A.                                   </option>
+						<option>033 BANCO SANTANDER BANESPA S.A.                     </option>
+
+						<option>035 BANCO DO ESTADO DO CEARA S.A. BEC                </option>
+						<option>036 BANCO BEM S.A.                                   </option>
+						<option>037 BANCO DO ESTADO DO PARA S.A.                     </option>
+						<option>038 BANCO BANESTADO S.A.                             </option>
+						<option>039 BANCO DO ESTADO DO PIAUI S.A.-BEP                </option>
+						<option>040 BANCO CARGILL S.A                                </option>
+
+						<option>041 BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.        </option>
+						<option>044 BANCO BVA SA                                     </option>
+						<option>045 BANCO OPPORTUNITY S.A.                           </option>
+						<option>047 BANCO DO ESTADO DE SERGIPE S.A.                  </option>
+						<option>062 BANCO1.NET S.A                                   </option>
+						<option>063 BANCO IBI S.A - BANCO MULTIPLO                   </option>
+
+						<option>065 LEMON BANK BANCO MULTIPLO S.A                    </option>
+						<option>066 BANCO MORGAN STANLEY DEAN WITTER S.A             </option>
+						<option>070 BRB - BANCO DE BRASILIA S.A.                     </option>
+						<option>072 BANCO RURAL MAIS S.A                             </option>
+						<option>073 BB BANCO POPULAR DO BRASIL                       </option>
+						<option>074 BANCO J. SAFRA S.A.                              </option>
+
+						<option>096 BANCO BM&F DE SERV. DE LIQUIDACAO E CUSTODIA S.A </option>
+						<option>104 CAIXA ECONOMICA FEDERAL                          </option>
+						<option>107 BANCO BBM S.A                                    </option>
+						<option>116 BANCO UNICO S.A.                                 </option>
+						<option>151 BANCO NOSSA CAIXA S.A                            </option>
+
+						<option>175 BANCO FINASA S.A.                                </option>
+						<option>184 BANCO ITAU BBA S.A                               </option>
+						<option>204 AMERICAN EXPRESS BANK(BRASIL) BANCO MULTIPLO S.A </option>
+						<option>208 BANCO PACTUAL S.A.                               </option>
+						<option>210 DRESDNER BANK LATEINAMERIKA AKTIENGESELLSCHAFT   </option>
+						<option>212 BANCO MATONE S.A.                                </option>
+
+						<option>213 BANCO ARBI S.A.                                  </option>
+						<option>214 BANCO DIBENS S.A.                                </option>
+						<option>215 BANCO COMERCIAL E DE INVESTIMENTO SUDAMERIS S.A  </option>
+						<option>217 BANCO JOHN DEERE S.A.                            </option>
+						<option>218 BANCO BONSUCESSO S.A.                            </option>
+						<option>222 BANCO CALYON BRASIL S/A                          </option>
+
+						<option>224 BANCO FIBRA S.A.                                 </option>
+						<option>225 BANCO BRASCAN S.A.                               </option>
+						<option>229 BANCO CRUZEIRO DO SUL S.A.                       </option>
+						<option>230 UNICARD BANCO MULTIPLO S.A                       </option>
+						<option>233 BANCO GE CAPITAL S.A                             </option>
+						<option>237 BANCO BRADESCO S.A.                              </option>
+
+						<option>241 BANCO CLASSICO S.A.                              </option>
+						<option>243 BANCO MAXIMA S.A.                                </option>
+						<option>244 BANCO CIDADE S.A.                                </option>
+						<option>246 BANCO ABC BRASIL S.A.                            </option>
+						<option>247 BANCO UBS S.A                                    </option>
+						<option>248 BANCO BOA VISTA INTERATLANTICO S.A               </option>
+
+						<option>249 BANCO INVESTCRED UNIBANCO S.A                    </option>
+						<option>250 BANCO SCHAHIN S.A                                </option>
+						<option>252 BANCO FININVEST S.A.                             </option>
+						<option>254 PARANA BANCO S.A.                                </option>
+						<option>263 BANCO CACIQUE S.A.                               </option>
+						<option>265 BANCO FATOR S.A.                                 </option>
+
+						<option>266 BANCO CEDULA S.A.                                </option>
+						<option>291 BANCO BCN S.A.                                   </option>
+						<option>300 BANCO DE LA NACION ARGENTINA                     </option>
+						<option>318 BANCO BMG S.A.                                   </option>
+						<option>320 BANCO INDUSTRIAL E COMERCIAL S.A.                </option>
+						<option>341 BANCO ITAU S.A.                                  </option>
+
+						<option>347 BANCO SUDAMERIS DO BRASIL S.A                    </option>
+						<option>351 BANCO SANTANDER S.A.                             </option>
+						<option>353 BANCO SANTANDER BRASIL S.A.                      </option>
+						<option>356 BANCO ABN AMRO REAL S.A.                         </option>
+						<option>366 BANCO SOCIETE GENERALE BRASIL S.A                </option>
+						<option>370 BANCO WESTLB DO BRASIL  S.A.                     </option>
+
+						<option>376 BANCO J.P. MORGAN S.A.                           </option>
+						<option>389 BANCO MERCANTIL DO BRASIL S.A.                   </option>
+						<option>392 BANCO MERCANTIL DE SAO PAULO S.A.                </option>
+						<option>394 BANCO BMC S.A.                                   </option>
+						<option>399 HSBC BANK BRASIL S.A.-BANCO MULTIPLO             </option>
+						<option>409 UNIBANCO - UNIAO DE BANCOS BRASILEIROS S.A.      </option>
+
+						<option>412 BANCO CAPITAL S.A.                               </option>
+						<option>422 BANCO SAFRA S.A.                                 </option>
+						<option>453 BANCO RURAL S.A.                                 </option>
+						<option>456 BANCO DE TOKYO MITSUBISHI BRASIL S.A.            </option>
+						<option>464 BANCO SUMITOMO MITSUI BRASILEIRO S.A.            </option>
+						<option>477 CITIBANK N.A.                                    </option>
+
+						<option>479 BANKBOSTON BANCO MULTIPLO S.A.                   </option>
+						<option>487 DEUTSCHE BANK S. A. - BANCO ALEMAO               </option>
+						<option>488 JPMORGAN CHASE BANK                              </option>
+						<option>492 ING BANK N.V.                                    </option>
+						<option>494 BANCO DE LA REPUBLICA ORIENTAL DEL URUGUAY       </option>
+						<option>495 BANCO DE LA PROVINCIA DE BUENOS AIRES            </option>
+
+						<option>505 BANCO CREDIT SUISSE FIRST BOSTON S.A.            </option>
+						<option>600 BANCO LUSO BRASILEIRO S.A.                       </option>
+						<option>604 BANCO INDUSTRIAL DO BRASIL S. A.                 </option>
+						<option>610 BANCO VR S.A.                                    </option>
+						<option>611 BANCO PAULISTA S.A.                              </option>
+						<option>612 BANCO GUANABARA S.A.                             </option>
+
+						<option>613 BANCO PECUNIA S.A.                               </option>
+						<option>623 BANCO PANAMERICANO S.A.                          </option>
+						<option>626 BANCO FICSA S.A.                                 </option>
+						<option>630 BANCO INTERCAP S.A.                              </option>
+						<option>633 BANCO RENDIMENTO S.A.                            </option>
+						<option>634 BANCO TRIANGULO S.A.                             </option>
+
+						<option>637 BANCO SOFISA S.A.                                </option>
+						<option>638 BANCO PROSPER S.A.                               </option>
+						<option>641 BANCO ALVORADA S.A.                              </option>
+						<option>643 BANCO PINE S.A.                                  </option>
+						<option>650 BANCO PEBB S.A.                                  </option>
+						<option>652 BANCO ITAU HOLDING FINANCEIRA S.A                </option>
+
+						<option>653 BANCO INDUSVAL S.A.                              </option>
+						<option>654 BANCO A.J. RENNER S.A.                           </option>
+						<option>655 BANCO VOTORANTIM S.A.                            </option>
+						<option>707 BANCO DAYCOVAL S.A.                              </option>
+						<option>719 BANIF-BANCO INTERNACIONAL DO FUNCHAL (BRASIL) S.A</option>
+						<option>721 BANCO CREDIBEL S.A.                              </option>
+
+						<option>734 BANCO GERDAU S.A.                                </option>
+						<option>735 BANCO POTTENCIAL S.A.                            </option>
+						<option>738 BANCO MORADA S.A.                                </option>
+						<option>739 BANCO BGN S.A.                                   </option>
+						<option>740 BANCO BARCLAYS S.A.                              </option>
+						<option>741 BANCO RIBEIRAO PRETO S.A.                        </option>
+
+						<option>743 BANCO EMBLEMA S.A.                               </option>
+						<option>744 BANKBOSTON N.A.                                  </option>
+						<option>745 BANCO CITIBANK S.A.                              </option>
+						<option>746 BANCO MODAL S.A.                                 </option>
+						<option>747 BANCO RABOBANK INTERNATIONAL BRASIL S.A.         </option>
+						<option>748 BANCO COOPERATIVO SICREDI S.A.                   </option>
+
+						<option>749 BANCO SIMPLES S.A.                               </option>
+						<option>751 DRESDNER BANK BRASIL S.A. BANCO MULTIPLO.        </option>
+						<option>752 BANCO BNP PARIBAS BRASIL S.A                     </option>
+						<option>753 BANCO COMERCIAL URUGUAI S.A.                     </option>
+						<option>756 BANCO COOPERATIVO DO BRASIL S.A.                 </option>
+						<option>757 BANCO KEB DO BRASIL S.A.                         </option>
+						</select></td>
+
+				</tr>
+	
+
+				<tr>
+					<td>Agência:</td>
+					<td><input type="textbox" name="txtagencia" value="" size="10" maxlength="10"></td>
+				</tr>
+				
+				<tr>
+					<td>Conta:</td>
+					<td><input type="textbox" name="txtconta" value="" size="20" maxlength="20"></td>
+				</tr>
+				
+				<tr>
+					<td>Valor:</td>
+					<td><input type="textbox" name="txtvalor" value="" size="20" maxlength="20"></td>
+				</tr>
+					
+        
+			</table>
+
+			<br><br>
+	    		
+	    		<input type="reset" name="butOK" value="Cancelar"  style="width: 150; height: 30" onclick="">
+  	       		<input type="button" name="menu" value="Voltar ao Menu" style="width: 150; height: 30; color: cadetblue" onclick="window.location.href='2_menuopcoesfinanceiro.htm';">
+  	       		<input type="button" name="enviar" value="Enviar" onclick="Fgrava()" style="width: 150; height: 30; color: red"></td>
+	    		
+	    		<br><br>
+						
+           		<div id="divagencia"></div>
+  	       		<div id="divconta"></div>
+  	       		<div id="divvalor"></div></center>
+
+				
+		</form>	
+		
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
+
+
+		<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+		<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+		<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+		
+	</body>
+
+</html>
+
+
+
+

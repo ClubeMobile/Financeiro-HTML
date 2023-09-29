@@ -1,0 +1,324 @@
+<html>
+
+	<head>
+
+		<title>ORDEM DE PAGAMENTO/RECEBIMENTO</title>
+
+
+	<script language="javascript">
+
+
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}	
+	
+
+	</script>
+
+
+
+		<style type="text/css">
+    
+		table 
+		{
+			border-width: medium;
+			border-style: one;
+		}
+    
+		#tabuser
+		{
+			border-width: 0;
+		}
+    
+		div
+		{
+			color:red;
+			font-family:verdana;
+			font-size:11px;
+			font-weight:bold;
+		}
+    	
+    		</style>	
+
+    
+	<script language="javascript">,
+
+
+		function Fenviar()
+		{
+
+		var data, valor, desc, coddoc, codvend, divdata, divvalor, divdesc,divcoddoc, divcodvend;
+    	  
+		data=frm.txtdata.value;
+		valor=frm.txtvalor.value;
+		desc=frm.txtdesc.value;
+		coddoc=frm.txtdoc.value;
+		codvend=frm.txtvend.value;
+
+    	  
+		divdata=document.getElementById("divdata");
+		divvalor=document.getElementById("divvalor");
+		divdesc=document.getElementById("divdescdoc");
+		divcoddoc=document.getElementById("divcoddoc");
+ 		divcodvend=document.getElementById("divcodvend");
+    	  
+		divdata.innerHTML="";
+		divvalor.innerHTML="";
+		divdesc.innerHTML="";
+		divcoddoc.innerHTML="";
+		divcodvend.innerHTML="";
+    	  
+
+		if(data.length<10)
+		{
+			divdata.innerHTML="*O campo 'Data:' está preenchido incorretamente!";
+		}
+    	  
+		if(isFinite(valor)==false)
+		{
+			divvalor.innerHTML="*O campo 'Valor:' está preenchido incorretamente!";
+		}
+    	  
+		if(desc.length<15)
+		{
+			divdesc.innerHTML="*O campo 'Descrição do Documento:' deve conter mais caracteres!";
+		}
+    	  
+		if((isFinite(coddoc)==false)||(coddoc.length<1))
+		{
+			divcoddoc.innerHTML="*O campo 'Código do documento:' está incorreto!";
+		}
+    	  
+		if(codvend.length<1)
+		{
+			divcodvend.innerHTML="*O campo 'Código do vendedor:' está incorreto";
+		}
+
+
+ 		}//function Fenviar()
+
+	</script>
+
+    
+    	<script language="javascript" type="text/javascript">
+    	
+	
+		function mascaraData(campoData)
+        	{
+
+              	var data = campoData.value;
+
+              	if (data.length == 2)
+              	{
+			data = data + '/';
+			document.frm.txtdata.value = data;
+			return true;              
+		}
+
+		if (data.length == 5)
+		{
+			data = data + '/';
+			document.frm.txtdata.value = data;
+			return true;
+		}
+
+
+		}//function mascaraData(campoData)
+
+	</script>
+     	
+    
+	</head>
+
+	
+
+
+	<body bgcolor="silver">
+	
+		<form name="frm">
+  		
+			<table id="tabuser" border="0">
+
+				<tr>
+
+  					<td>
+
+  	            				<table bgcolor="white">
+
+							<tr>
+					
+								<td>
+								<fieldset style="width: 199; height: 79" bgcolor="white">
+								<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+    								<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+								<font size="2">Acesso Restrito - Depto. Financeiro</font>
+								<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="Desconecta()"></p></input>
+								</fieldset>
+								</td>
+
+  		            				</tr>
+					</td>
+
+  		            			</table>
+  					
+
+					<td>
+						
+
+						<table id="null" bgcolor="silver" border="0">
+
+							<tr>
+						
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+								
+							</tr>
+
+						</table>
+
+					</td>
+
+					<td>
+					
+								
+  						<table bgcolor="white">
+
+               						<tr>
+
+  	            						<td colspan="2">
+								<fieldset style="width: 230; height: 35;">
+	  							<legend><b><font size="2" color="black">Escolha a Opção:</b></legend>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="radiopcao" checked>Pagamento &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="radiopcao">Recebimento
+								</td>
+             						</tr>
+            				
+						</table>
+	
+
+  					</td>
+
+
+				</tr>
+
+
+			</table>
+				
+			
+			<br><hr><br><br>
+
+	
+			<center><fieldset style="width: 700; height: 520;">
+			<legend align="center"><font size="5" color="blue">Inclusão de Pagamento</font></legend>
+			<br>
+   			<table bgcolor="white">
+			<hr color="cadetblue"><br>
+				<tr>
+
+  					<td>Data:</b><br><input type="textbox" name="txtdata" OnKeyUp="mascaraData(this);" maxlength="10" style="width: 80;"></td>
+
+  					<td>Valor:<br><input type="textbox" name="txtvalor" value="" style="width: 150;"></td>
+
+  					<td>Descrição do Documento:<br><input type="textbox" name="txtdesc" value="" maxlength="30" size="30" style="width: 350;"></td>
+
+  				</tr>
+  				
+				<tr>
+  					<td colspan="3"><hr></td>
+  				</tr>
+
+  				<tr>
+
+  					<td><br>Código do Documento:<br><input type="textbox" name="txtdoc" value="" maxlength="10"></td>
+
+  				</tr>
+  			
+				<tr>
+  					<td colspan="3"><hr></td>
+  				</tr>
+
+  				<tr>
+
+  					<td><br>Código do Vendedor:<br><input type="textbox" name="txtvend" value="" maxlength="7" size="7"></td>
+
+  				</tr>
+
+				<tr>
+  					<td colspan="3"><hr></td>
+  				</tr>
+  			
+  				<tr>
+
+  					<td><br><b>Pagamento/Recebimento em:<br>
+  					<select name="selpgto">
+  					<option>Boleto</option>
+  					<option>Credito em C/C</option>  
+  					<option>Cheque</option>  
+  					<option>Dinheiro</option>    					
+  					</select></td>
+
+  				</tr>
+  			
+				<tr>
+
+					<td colspan="3"><br><p align="center"><font color="silver"><b>_________________________________________________________________________________________________________________________</b><font></p></td>
+
+				</tr>
+
+  	       		
+			</table><br>
+				
+
+			<input type="button" name="imprimir" value="Imprimir" style="width: 120; height: 30; color: black"; onclick="window.location.href='imprimir.html';">
+  	       		<input type="button" name="menu" value="Voltar ao Menu" style="width: 150; height: 30; color: cadetblue"; onclick="window.location.href='2_menuopcoesfinanceiro.htm';">
+  	       		<input type="button" name="enviar" value="Enviar" onclick="Fenviar()" style="width: 150; height: 30; color: red";></td>
+				
+			<br><br></fieldset>
+  	       		
+  	       		
+			<div id="divdata"></div>
+  	       		<div id="divvalor"></div>
+  	       		<div id="divdescdoc"></div>
+  	       		<div id="divcoddoc"></div>
+  	       		<div id="divcodvend"></div>	
+  		
+		</form></center>
+
+  	
+  	
+	<br><br><br><br><hr>
+
+	<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+	<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+	<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+
+	</body>
+
+</html>
+
+
+
+
+
+

@@ -1,0 +1,557 @@
+<html>
+
+	<head>
+
+	<title>FORMA DE PAGAMENTO - BOLETO BANCÁRIO</title>
+
+	<style type="text/css">
+    
+		table  
+		{
+     			border-width: medium;
+     			border-style: double;
+		}
+
+		#tabuser
+		{
+			border-width: 0;
+		}
+    
+		#null
+		{
+			border-width: 0;
+		}
+    
+    
+		div
+		{
+			color:red;
+			font-family:verdana;
+			font-size:11px;
+			font-weight:bold;
+		}
+		
+	</style>
+
+
+	<script language="javascript">
+
+
+		var Conexao = new ActiveXObject("ADODB.CONNECTION");
+		var Recordset = new ActiveXObject("ADODB.RECORDSET");
+
+
+		function Conecta()
+		{
+			var connString;
+
+			var caminho = "";
+   			var diretorio = "";
+
+    			diretorio = unescape(window.location.href.substring( 8 , (window.location.href.lastIndexOf ( "/" )) + 1 ))
+   			caminho = diretorio + "concessionaria.mdb"
+
+    			connString = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" + caminho;
+    			Conexao.open(connString);
+		}
+
+
+		function Desconecta()
+		{
+    			Conexao.close();
+		}
+
+
+		function FExibe()
+		{
+
+		var nome,cnpj,add,num,bairro,cid,cep;
+	
+		var numero,esp,bol,data,val,venc;
+
+		var saidaNome,saidaCnpj,saidaAdd,saidaNum,saidaBairro,saidaCid,saidaCep;
+	
+		var saidaNumero,saidaEsp,saidaBol,saidaData,saidaVal,saidavenc;
+
+	
+		nome = frm.txtNome.value;
+		cnpj = frm.txtCnpj.value;
+		add = frm.txtEndereco.value;
+		num = frm.txtNum.value;
+		bairro = frm.txtBairro.value;
+		cid = frm.txtCidade.value;
+		cep = frm.txtCep.value;
+	
+		numero = frm.txtNumero.value;
+		esp = frm.txtEspecie.value;
+		bol = frm.txtBol.value;
+		data = frm.txtdata.value;
+		val = frm.txtValor.value;
+		venc = frm.txtVenc.value;
+	
+	
+		saidaNome = document.getElementById("divNome");
+		saidaCnpj = document.getElementById("divCnpj");
+		saidaAdd = document.getElementById("divAdd");
+		saidaNum = document.getElementById("divNum");
+		saidaBairro = document.getElementById("divBairro");
+		saidaCid = document.getElementById("divCid");
+		saidaCep = document.getElementById("divCep");
+	
+		saidaNumero = document.getElementById("divNum2");
+		saidaEsp = document.getElementById("divEsp");
+		saidaBol = document.getElementById("divBol");
+		saidaData = document.getElementById("divData");
+		saidaVal = document.getElementById("divVal");
+		saidaVenc = document.getElementById("divVenc");
+	
+	
+		saidaNome.innerHTML = "";
+		saidaCnpj.innerHTML = "";
+		saidaAdd.innerHTML = "";
+		saidaNum.innerHTML = "";
+		saidaBairro.innerHTML = "";
+		saidaCid.innerHTML = "";
+		saidaCep.innerHTML = "";
+	
+		saidaNumero.innerHTML = "";
+		saidaEsp.innerHTML = "";
+		saidaBol.innerHTML = "";
+		saidaData.innerHTML = "";
+		saidaVal.innerHTML = "";
+		saidaVenc.innerHTML = "";
+
+
+		
+		if (nome.length < 5)
+		{	
+			saidaNome.innerHTML = "*Nome deve possuir mais que 5 caracteres";
+		}
+
+		if (isFinite(nome)==true)
+		{	
+			saidaNome.innerHTML = "*Nome deve possuir apenas letras";
+		}
+
+   		if (cnpj.length != 14)
+		{	
+			saidaCnpj.innerHTML = "*Cnpj deve possuir 14 números";
+		}
+
+		if (isFinite(cnpj) == false)
+		{	
+			saidaCnpj.innerHTML = "*Cnpj deve ser apenas numérico";
+		}
+	
+    		if (add.length < 5)
+		{	
+			saidaAdd.innerHTML = "*Endereço deve possuir mais que 5 caracteres";
+		}
+
+		if (isFinite(add) == true)
+		{	
+			saidaAdd.innerHTML = "*Endereço deve possuir apenas letras";
+		}
+		
+		if (num.length < 1)
+		{	
+			saidaNum.innerHTML = "*Numero deve possuir mais que 1 caracter";
+		}
+		
+		if (isFinite(num) == false)
+		{	
+			saidaNum.innerHTML = "*Numero deve ser apenas numérico";
+		}
+	
+	
+    		if (bairro.length < 5)
+		{	
+			saidaBairro.innerHTML = "*Bairro deve possuir mais que 5 caracteres";
+		}
+
+		if (isFinite(bairro) == true)
+		{	
+			saidaBairro.innerHTML = "*Bairro deve possuir apenas letras";
+		}
+	
+	
+    		if (cid.length < 5)
+		{	
+			saidaCid.innerHTML = "*Cidade deve possuir mais que 5 caracteres";
+		}
+
+		if (isFinite(cid) == true)
+		{	
+			saidaCid.innerHTML = "*Cidade deve possuir apenas letras";
+		}
+	
+	
+    		if (cep.length !=9)
+		{	
+			saidaCep.innerHTML = "*Cep está preenchido incorretamente";
+		}
+
+	
+// Tabela 2
+
+
+		if (numero.length < 4)
+		{	
+			saidaNumero.innerHTML = "*Numero deve possuir mais que 4 caracteres";
+		}
+
+		if (isFinite(numero) == false)
+		{	
+			saidaNumero.innerHTML = "*Numero deve ser apenas numérico";
+		}
+	
+	
+		if (esp.length < 2)
+		{	
+			saidaEsp.innerHTML = "*Especie deve possuir mais que 2 caracteres";
+		}
+	
+	
+		if (bol.length < 4)
+		{	
+			saidaBol.innerHTML = "*Sequência do Boleto deve possuir mais que 4 caracteres";
+		}
+
+		if (isFinite(bol) == false)
+		{	
+			saidaBol.innerHTML = "*Sequência do Boleto deve ser apenas numérico";
+		}
+	
+		
+		if (data.length != 10)
+		{	
+			saidaData.innerHTML = "*Data está preenchido incorretamente";
+		}
+	
+	
+		if (val.length < 1)
+		{	
+			saidaVal.innerHTML = "*Valor deve possuir 1 caracter";
+		}
+
+		if (isFinite(val) == false)
+		{	
+			saidaVal.innerHTML = "*Valor deve ser apenas numérico";
+		}
+	
+	
+		if (venc.length != 10)
+		{	
+			saidaVenc.innerHTML = "*Vencimento está preenchido incorretamente";
+		}
+
+
+		}
+
+	</script>
+
+
+
+	<script language="javascript" type="text/javascript">
+    	
+		function mascaraData(campoData)
+          	{
+
+			var data = campoData.value;
+
+			if (data.length == 2)
+			{
+				data = data + '/';
+				document.frm.txtdata.value = data;
+				return true;              
+			}
+	
+			if (data.length == 5)
+              		{
+                  		data = data + '/';
+                  		document.frm.txtdata.value = data;
+                  		return true;
+              		}
+
+         	}
+         
+
+         	function mascaraVenc(campoVenc)
+          	{
+
+              		var venc = campoVenc.value;
+
+              		if (venc.length == 2)
+              		{
+                  		venc = venc + '/';
+                  		document.frm.txtVenc.value = venc;
+                  		return true;              
+              		}
+
+              		if (venc.length == 5)
+              		{
+                 		venc = venc + '/';
+                  		document.frm.txtVenc.value = venc;
+                  		return true;
+              		}
+         	}
+
+         
+         	function mascaraCep(campoCep)
+          	{
+
+			var cep = campoCep.value;	
+
+              		if (cep.length == 5)
+              		{
+                  		cep = cep + '-';
+                  		document.frm.txtCep.value = cep;
+                  		return true;
+              		}
+         	}
+
+	</script>
+    
+       
+	</head>
+
+
+
+
+	<body bgcolor="silver">
+
+		<form name="frm">
+
+			<table id="tabuser" border="0">
+
+  				<tr>
+
+  					<td>
+
+  	            				<table bgcolor="white">
+
+  		            				<tr>
+
+  			        				<td><fieldset style="width: 199; height: 79" bgcolor="white">
+  								<legend><b><font size="2" color="black">USUÁRIO</font></b></legend>
+    								<font color="#FF0000" face="Times New Roman" size="2"><b>Olá Senhor(a) Roberto!</b><br></font>
+								<font size="2">Acesso Restrito - Depto. Financeiro</font>
+								<br><p align="right"><input type="button" name="idesconectar" value="Desconectar" style="width: 93; height: 23; color: red" onclick="window.location.href='paginainicial.htm';"></p></input></fieldset>
+								</td>
+
+  		            				</tr>
+
+  		            			</table>
+  					
+
+					<td>
+
+
+						<table id="null">
+
+							<tr>
+
+								<td>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+								</td>
+
+							</tr>
+						
+						</table>
+
+					<td>
+					
+								
+  						<table bgcolor="white">
+
+               						<tr>
+
+  	            						<td colspan="2"><fieldset style="width: 230; height: 35; color: black">
+	  							<legend><b><font size="2" color="black">Escolha a Opção:</b></legend>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="radiopcao" checked>Pagamento &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="radiopcao">Recebimento
+								</td>
+
+             						</tr>
+						
+						</table>
+	
+					</td>
+
+				</tr>
+
+  			</table>
+
+			<hr>
+			<br>
+  		 
+			<center><fieldset style="width: 1100; height: 720"><br><br>
+			<fieldset style="width: 1000; height: 270">
+			<legend align="center"><font color="blue" size="5"><b>Informações do sacado</b></font></legend>
+
+			<br><hr color="brown"><br>
+
+ 			<table bgcolor="white">
+
+				<tr>
+
+					<td>Nome:</td>
+    					<td><input type="textbox" name="txtNome" size="50">
+					</td>
+
+   				</tr>
+ 
+   				<tr>
+
+    					<td>Cnpj:</td>
+    					<td><input type="textbox" name="txtCnpj" size"30" maxlength="14">
+   					</td>
+
+  				</tr>
+   
+  				<tr>
+
+   					<td>Endereço:</td>
+   					<td><input type="textbox" name="txtEndereco" size="50">
+   					<td>Numero: <input type="textbox" name="txtNum" size="10">
+					<td>Complemento: <input type="textbox" name="txtComp" size="30"> 
+					</td>
+   				
+				</tr>
+	
+				<tr>
+
+					<td>Bairro:</td>
+					<td><input type="textbox" name="txtBairro">	
+					</td>
+
+  				</tr>
+
+  				<tr>
+
+					<td>Cidade:</td>
+   					<td><input type="textbox" name="txtCidade">
+  					</td>
+
+  				</tr>
+
+				<tr>
+
+   					<td>Cep:</td>
+   					<td><input type="textbox" name="txtCep" OnKeyUp="mascaraCep(this);" maxlength="9">
+					</td>
+
+				</tr>
+
+			</table></fieldset>
+		
+			<br>
+ 	 
+	 		<br>
+			
+			<fieldset style="width: 1000; height: 270"><br>
+			<legend align="center"><font color="white" size="5"><b>Informações do Boleto</b></font></legend>
+ 			 
+			<hr color="orange"><br>
+
+			<table bgcolor="white">
+
+
+				<tr>
+			
+					<td>Número:</td>
+					<td><input type="textbox" name="txtNumero" size="62">
+					</td>
+
+				</tr>
+ 
+				<tr>
+
+					<td>Espécie:</td>
+					<td><input type="textbox" name="txtEspecie" size"30">
+					</td>
+
+				</tr>
+   
+				<tr>
+
+					<td>Sequência do boleto:</td>
+					<td><input type="textbox" name="txtBol" size="50">
+	   				</td>
+
+  				</tr>
+
+  				<tr>
+
+   					<td>Data:</td>
+   					<td><input type="textbox" name="txtdata" OnKeyUp="mascaraData(this);" maxlength="10">
+ 					</td>
+
+  				</tr>
+
+  				<tr>
+
+   					<td>Valor:</td>
+   					<td><input type="textbox" name="txtValor">
+  					</td>
+
+  				</tr>
+
+  				<tr>
+
+   					<td>Vencimento:</td>
+					<td><input type="textbox" name="txtVenc" OnKeyUp="mascaraVenc(this);" maxlength="10">
+					</td>
+
+				</tr>
+  
+
+ 			</table><br></fieldset>
+ 	
+       		        <br>
+
+	    		<input type="reset" name="butOK" value="Cancelar"  style="width: 150; height: 30" onclick="">
+  	       		<input type="button" name="menu" value="Voltar ao Menu" style="width: 150; height: 30; color: cadetblue" onclick="window.location.href='menuopcoesfinanceiro.htm';">
+  	       		<input type="button" name="enviar" value="Enviar" onclick="FExibe()" style="width: 150; height: 30; color: red"></td>
+
+			<br><br></fieldset></center><br><br>
+
+			<center>
+			<div id="divNome"></div>
+	 		<div id="divCnpj"></div>
+	 		<div id="divAdd"></div>
+	 		<div id="divNum"></div>
+	 		<div id="divBairro"></div>
+	 		<div id="divCid"></div>
+	 		<div id="divCep"></div>
+
+     	 		<div id="divNum2"></div>
+	 		<div id="divEsp"></div>
+	 		<div id="divBol"></div>
+	 		<div id="divData"></div>
+	 		<div id="divVal"></div>
+	 		<div id="divVenc"></div>
+			</center>
+
+		</form>
+
+
+		<br><br><br><br><hr>
+
+
+		<h4><center>Desenvolvido por Grupo B - Módulo Financeiro - Todos os direitos reservados!</center>
+		<center>Centro Universitário Sant'Anna - Graduação Tecnológica em Análise e Desenvolvimento de Sistemas</center>
+		<center>Para maiores informações, acesse: <a href="http://www.unisantanna.br" link="red" alink="white" vlink="blue">www.unisantanna.br<a></center></h4>
+
+
+	</body>
+
+</html>
+
+
+
+
+
+
+
